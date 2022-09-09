@@ -1,0 +1,103 @@
+.todos-container{
+    /* Entire page width */
+    width:100%;
+    /* Entire page height */
+    height:100vh;
+    /* Responsive layout */
+    display:flex;
+    /* Display on top of the other */
+    flex-direction: column; 
+    /* Display horizontally at the center */ 
+    align-items: center;
+    /* Smooth transition to bottom right with different colors */
+    background-image: linear-gradient(to top, #f87094,#c51ea1,#351488);
+    /* To cover the entire screen */
+    background-size:cover;
+    /* Image position */
+    background-position:center;
+    /* To not repeat the image beyond it's scale */
+    background-repeat:no-repeat;
+}
+
+.form{
+    /** Sizeable width for the form **/
+    width:400px;
+    /** Sizeable height for the form **/
+    height:60%;
+    /** Black color with opacity **/
+    background-color:rgba(0,0,0,0.5);
+    /** Responsive layout **/
+    display:flex;
+    /** One element on top of the other **/
+    flex-direction:column;
+    /** Vertically at the center **/
+    justify-content: center;
+    /** Smooth corners **/
+    border-radius:10px;
+    /** Top, bottom, right, and left spacing between form and it's content **/
+    padding:20px;
+    /** Spacing from the top **/
+    margin-top:10px;
+}
+
+.form-group{
+    /** Bottom space between one form-group and the other **/
+    margin-bottom:20px;
+    /** Responsive layout **/
+    display: flex;
+    /** One element on top of the other **/
+    flex-direction: column;
+}
+
+.form-group label{
+    /** Medium font size **/
+    font-size:14px;
+    /** Visible color **/
+    color:white;
+    /** Bottom space between it and the input form **/
+    margin-bottom:5px;
+}
+
+.form-group input[type="text"],textarea{
+    /** Size-able width of the input **/
+    width:90%; 
+    /** Size-able height of the input **/
+    height:30px; 
+    /** Smooth corners on all edges **/
+    border-radius:10px;
+    /** No line sorrounding the input **/ 
+    border:none;
+    /** Top, right, bottom, right spacing to where content starts **/
+    padding:10px;
+    /** Medium font **/
+    font-size:12px;
+    /** Visible color **/
+    color:white;
+    /** Dark background with some opacity **/
+    background-color:rgba(36, 8, 8, 0.5); 
+}
+
+.form-group textarea{
+    height:70px;
+    resize: none;
+    /* max-width: 100%; */
+}
+
+.form-group .form-submit-btn{
+    /** Take up the entire available width **/
+    width:100%; 
+    /** Sizeable height **/
+    height:40px; 
+    /** Smooth corners at all edges **/
+    border-radius:5px;
+    /** No line on the outline **/
+    border:none;
+    /** Greyish color **/
+    background-color:rgba(255,255,255,0.5);
+    /** Color of text **/
+    color:black;
+    /** Medium sized font **/
+    font-size:16px;
+    /** Display a pointer when mouse is over it **/
+    cursor:pointer;
+}
