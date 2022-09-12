@@ -3,13 +3,13 @@ import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 
 import { getTask } from './actions/tasks.js'
-import Tasks from './Components/Tasks/Tasks';
+import Tasks from './Components/Posts/Tasks';
 
 
 import Form from './Components/Form/Form.js';
 // import Todo from './Components/Form/todo.js';
 
-import todo from './images/logo.png';   
+import todo from './images/download.png';   
 import useStyles from './styles.js';
 
 const App = () => { 
