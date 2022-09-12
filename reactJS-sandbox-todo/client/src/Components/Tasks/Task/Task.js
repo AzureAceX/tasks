@@ -1,8 +1,7 @@
 import React from 'react';
-import {Card, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
+import {Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 // import { deleteTask, updateTaskStatus } from '../../actions/tasks.js';
 
 import useStyles from './styles';
@@ -34,10 +33,11 @@ const Task = ({task}) => {
             </CardContent>
             <CardActions className={classes.cardActions}>
                 <Button size="small" color="primary" onClick={handleDelete} >
-                    <DeleteIcon fontSize="small"/> <strike>Delete </strike>
+                    <HighlightOffIcon/>
+                    <strike>Delete </strike>
                 </Button>
                 <Button size="small" color="primary" onClick={handleUpdate} >
-                    <ThumbUpAltIcon />
+                    <CheckCircleOutlineIcon/>
                     <strike>Done</strike>
                 </Button>
             </CardActions>

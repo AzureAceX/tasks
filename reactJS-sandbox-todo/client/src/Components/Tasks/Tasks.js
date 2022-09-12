@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, CircularProgress } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 
-import Task from "./Post/Task.js";
+import Task from "./Task/Task.js";
 import useStyles from './styles';
 
 const Tasks = () => {
