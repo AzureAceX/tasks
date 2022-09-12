@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import { getTask } from './actions/tasks.js'
 import Tasks from './Components/Tasks/Tasks';
 
-
 import Form from './Components/Form/Form.js';
 // import Todo from './Components/Form/todo.js';
 
@@ -31,16 +30,12 @@ const App = () => {
       <Grow in>
         <Container>
           <Grid container justifyContent="space-between" alignItems="stretch" spacing={1}>
-          <Grid item xs={12} sm={5} >
+          <Grid item xs={12} sm={5}>
               <Form />
-              {/* <Todo /> */}
             </Grid>
-            <Grid item xs={12} sm={7}>
+            <Grid item xs={12} sm={7} style={{maxHeight: '100vh', overflow: 'auto'}}>
               <Tasks/>
             </Grid>
-            {/* <Grid item xs={12} sm={5} md={12}>
-              < Todo />
-            </Grid> */}
           </Grid>
         </Container>
       </Grow>

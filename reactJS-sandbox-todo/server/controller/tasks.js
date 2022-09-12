@@ -33,3 +33,15 @@ export const updateTaskStatus = async (req, res) => {
     //     res.status(409).json({message: error.message});
     // }
 };
+
+export const deleteTask = async (req, res) => {
+    const task = req.body;
+  
+    // const newTask = new Task(task);
+    // try{
+    //     await newTask.save();
+    //     res.status(201).json(newTask);
+    // }catch (error){
+    //     res.status(409).json({message: error.message});
+    // }
+};

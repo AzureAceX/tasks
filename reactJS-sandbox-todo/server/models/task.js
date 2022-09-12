@@ -1,12 +1,11 @@
 import mongoose from 'mongoose';
 
 const taskSchema = mongoose.Schema({
-    taskId: Number,
-    parentId: Number,
+    parentTask: Number,
     title: String, 
     description: String, 
-    childTasks: [Number], 
     status: String,
+    childTasks: [String], 
 });
 
 
