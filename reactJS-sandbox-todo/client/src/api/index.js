@@ -6,6 +6,3 @@ export const fetchTask = () => axios.get(url);
 export const createTask = (newTask) => axios.post(url, newTask);
 export const updateTaskStatus = (task) => axios.put(url, task);
 export const deleteTask = (task) => axios.put(url, task);
-
-
-

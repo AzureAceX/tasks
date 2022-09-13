@@ -23,7 +23,7 @@ const Task = ({task}) => {
                 <Typography variant="body2">{task.title}</Typography>
             </div>
             <div className={classes.details}>
-                <Typography variant="body2" color="textSecondary">{task.childIds?.map((childIds,index) => `#${childIds} `) }</Typography>
+                <Typography variant="body2" color="textSecondary">{task.childIds?.map((childIds,index) => `${childIds} `) }</Typography>
             </div>
             <CardContent>
                 <Typography className={classes.title} variant="h5" gutterBottom>{task.description}</Typography>

@@ -1,0 +1,6 @@
+body {
+  background-color: #a1a0ca;
+  background-image: url("./images/page-turner.svg"); 
+  background-size: cover;
+  background-attachment: fixed;
+}
