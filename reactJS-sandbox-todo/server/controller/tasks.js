@@ -11,7 +11,7 @@ export const getTask = async (req, res) => {
 
 export const createTask = async (req, res) => {
     const task = req.body;
-  
+    
     const newTask = new Task(task);
     try{
         console.log(newTask.title)

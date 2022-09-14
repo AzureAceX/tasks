@@ -20,13 +20,13 @@ const Task = ({task}) => {
     return(
         <Card className={classes.card}>
             <div className={classes.overlay}>
-                <Typography variant="body2">{task.title}</Typography>
+                <Typography variant="h6">{task.title}</Typography>
             </div>
             <div className={classes.details}>
                 <Typography variant="body2" color="textSecondary">{task.childIds?.map((childIds,index) => `${childIds} `) }</Typography>
             </div>
             <CardContent>
-                <Typography className={classes.title} variant="h5" gutterBottom>{task.description}</Typography>
+                <Typography className={classes.title} variant="body2" gutterBottom>{task.description}</Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
                 <Button size="small" color="primary" onClick={handleDelete} >
