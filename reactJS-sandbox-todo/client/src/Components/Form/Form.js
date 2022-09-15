@@ -11,28 +11,55 @@ const Form = () => {
     const dispatch = useDispatch();
 
     const taskList = useSelector((state) => state.tasks.tasks);
-    // const [taskData, setTaskData ] = useState({parentTask: '', title:'', description:'', status:'In Progress' , childTasks:'' });
-    const [taskData, setTaskData ] = useState({parentTask: '', title:'', description:'', status:'In Progress' , childTasks:'' });
-    const [value, setValue] = useState([]);
 
-    // let parentTaskList = ['Empty', 'Empty'];
-    // console.log(taskList);
+    let parentTasksFiltered = [];
     const parentTaskList = taskList?.map((task, index) => {
-        return task.title;
+        return [{"_id": task._id}, {"title": task.title}];
     });
 
-    console.log(parentTaskList);
+    parentTaskList?.forEach((element) => {
+        parentTasksFiltered.push(JSON.parse(JSON.stringify(element[1].title))); //looks ugly.....forgive me for this sin
+    });
+
+    const [taskData, setTaskData ] = useState({parentTask: '', title:'', description:'', status:'In Progress' , childTasks:'' });
+    
+    // const [value, setValue] = useState([]);
+    const [value, setValue] = parentTasksFiltered;
+    const [inputValue, setInputValue] = parentTasksFiltered;
+
+    // parentTaskList = taskList?.map((task, index) => {
+    //     return task.title;
+    // });
 
     const handleSubmit = (e) => {
         e.preventDefault(); 
         // setTaskData({ ...taskData, status: 'In Progress'});
-        dispatch(createTask(taskData));
+        // dispatch(createTask(taskData));
         console.log(taskData)
     }   
 
     const clear = (e) => {
       e.preventDefault(); 
       setTaskData({parentTask:'', title:'', description:'', status:'In Progress', childTasks:''});
+    }
+
+    const handleDropValChange = (event, newValue) => {
+            setValue(newValue);
+            console.log(newValue)
+        }
+
+    const handleDropInputValChange = (event, newInputValue) => {
+        console.log(newInputValue)
+        setValue(newInputValue);
+    }
+
+    const handleDropdownChange = (e, value) => 
+    {
+        // e.preventDefault=true;
+        // e.defaultMuiPrevented = true;
+        // console.log(value);
+        // console.log(e.target);
+        // console.log(e.target.value); 
     }
 
     return(
@@ -44,14 +71,23 @@ const Form = () => {
                 {/* <Stack spacing={2} fullWidth width="97%"> */}
                 <Autocomplete 
                     // fullWidth={true}
+                    
                     sx={{width: '100%'}}
                     style={{paddingRight: '15px'}}
                     // fullWidth
-                    options={ parentTaskList ? parentTaskList : ['List Loading...'] } 
-                    renderInput={(params) =>  <TextField {...params} name="parentTask" label='Parent Task *optional*' value={taskData.parentTask} variant="outlined"
-                    // value = {e.setValue}
-                    // onChange={setValue} 
-                    onChange={(e) => setTaskData({ ...taskData, parentTask: e.target.value})}
+                    // options={ parentTaskList ? parentTaskList : ['List Loading...'] } 
+                    options={ parentTasksFiltered ? parentTasksFiltered : [] } 
+                    renderInput={(params) =>  <TextField {...params} name="parentTask" label='Parent Task *optional*' variant="outlined"
+                    value={value}
+                    onChange={handleDropValChange}
+                    inputValue={handleDropInputValChange}
+                    onInputChange={(event, newInputValue) => {
+                        setInputValue(newInputValue);
+                        console.log(inputValue);
+                    }}
+                    // onChange={handleDropdownChange}
+                    // onInputChange={handleDropdownChange}
+                    // setTaskData({ ...taskData, parentTask: value})
                     /> } />
                 {/* </Stack> */}
                 {/* <TextField name="parentTask" variant="outlined" label="Parent Task *optional*" fullWidth value={taskData.parentTask} onChange={(e) => setTaskData({ ...taskData, parentTask: e.target.value})} /> */}
