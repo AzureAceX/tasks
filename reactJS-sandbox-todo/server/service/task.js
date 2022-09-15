@@ -15,7 +15,6 @@ export const preCreation = async (req, res) => {
 };
 
 /*
-
 ----------------
 populate CHILD TASKS and update in DB
 
@@ -24,8 +23,9 @@ why
 (foreach(task in  childasks: if task.status != complete return "One or more child tasks are not completed, this task cannot be deleted or updated as complete."))
 - if they have no child the automatially we can mark it as complete
 
-when is a child
+when is a childTask [] made
 - on creation, we set parent task. So use .parentTask to find parent task, and append .title to the parents record
+- this makes create require a fine_by_title call... title isnt unique tho..
 
 
 */

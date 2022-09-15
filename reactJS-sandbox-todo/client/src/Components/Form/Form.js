@@ -15,11 +15,13 @@ const Form = () => {
     const [taskData, setTaskData ] = useState({parentTask: '', title:'', description:'', status:'In Progress' , childTasks:'' });
     const [value, setValue] = useState([]);
 
-    let parentTaskList = ['Empty', 'Empty'];
-    console.log(taskList);
-    parentTaskList = taskList?.map((task) => {
+    // let parentTaskList = ['Empty', 'Empty'];
+    // console.log(taskList);
+    const parentTaskList = taskList?.map((task, index) => {
         return task.title;
     });
+
+    console.log(parentTaskList);
 
     const handleSubmit = (e) => {
         e.preventDefault(); 
@@ -45,7 +47,7 @@ const Form = () => {
                     sx={{width: '100%'}}
                     style={{paddingRight: '15px'}}
                     // fullWidth
-                    options={ parentTaskList } 
+                    options={ parentTaskList ? parentTaskList : ['List Loading...'] } 
                     renderInput={(params) =>  <TextField {...params} name="parentTask" label='Parent Task *optional*' value={taskData.parentTask} variant="outlined"
                     // value = {e.setValue}
                     // onChange={setValue} 
