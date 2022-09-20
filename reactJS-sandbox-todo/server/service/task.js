@@ -1,31 +1,51 @@
 import Task from "../models/task.js";
 
+//run on update
+export const verifyUpdate = async (req, res) => {
 
-export const preCreation = async (req, res) => {
-    const task = req.body;
+    const Task = new Task();
+    let childElement = {};
+
+    //If there are no children tasks, then mark as complete
+    if(targetTask.childIds == 'undefined' || targetTask.childIds == '')
+        return Boolean.true;
+
+    //If the children tasks are ALL marked as DONE, then mark as complete
+    //Requires searching for each child by ID -> 
+    targetTask.childIds.forEach(element => {
+        childElement = Task.find(element._id)
+        if(childElement.status != "DONE")
+            return Boolean.false;
+    });
     
-    const newTask = new Task(task);
-    try{
-        console.log(newTask.title)
-        await newTask.save();
-        res.status(201).json(newTask);
-    }catch (error){
-        res.status(409).json({message: error.message});
-    }
 };
 
-/*
-----------------
-populate CHILD TASKS and update in DB
-
-why
-- so when you try to delete a task or update task, we can use that column in doc to search through the array of children, get their states and see if it can be deleted markede as completed 
-(foreach(task in  childasks: if task.status != complete return "One or more child tasks are not completed, this task cannot be deleted or updated as complete."))
-- if they have no child the automatially we can mark it as complete
-
-when is a childTask [] made
-- on creation, we set parent task. So use .parentTask to find parent task, and append .title to the parents record
-- this makes create require a fine_by_title call... title isnt unique tho..
+//run on create
+//link to Parent on task creation. Takes the new task id, and appends it to .childIds of the parent task 
+export const verifyParent = async (req, res) => {
+    const { id } =  req.params;
 
 
-*/
+};
+
+//run on delete
+//same logic as verifyUpdate, make sure all of it are COMPLETE before delete
+//additionally, remove it as a parent task and as a child task if all occurences
+//proof that having an array of childIds might not be the best way
+export const verifyDelete = async (req, res) => {
+    const Task = new Task();
+    let childElement = {};
+
+    //If there are no children tasks, then mark as complete
+    if(targetTask.childIds == 'undefined' || targetTask.childIds == '')
+        return Boolean.true;
+
+    //If the children tasks are ALL marked as DONE, then mark as complete
+    //Requires searching for each child by ID -> 
+    targetTask.childIds.forEach(element => {
+        childElement = Task.find(element._id)
+        if(childElement.status != "DONE")
+            return Boolean.false;
+    });
+
+};

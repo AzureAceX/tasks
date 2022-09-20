@@ -6,7 +6,7 @@ import { createTask } from '../../actions/tasks.js';
 
 import useStyles from './styles'
 
-const Form = () => {
+const Form = (currentId, setCurrentId) => {
     const classes = useStyles(); 
     const dispatch = useDispatch();
 
@@ -68,14 +68,9 @@ const Form = () => {
                 <Typography variant="h5">
                     Add A New Task
                 </Typography>
-                {/* <Stack spacing={2} fullWidth width="97%"> */}
-                <Autocomplete 
-                    // fullWidth={true}
-                    
+                {/* <Autocomplete                     
                     sx={{width: '100%'}}
                     style={{paddingRight: '15px'}}
-                    // fullWidth
-                    // options={ parentTaskList ? parentTaskList : ['List Loading...'] } 
                     options={ parentTasksFiltered ? parentTasksFiltered : [] } 
                     renderInput={(params) =>  <TextField {...params} name="parentTask" label='Parent Task *optional*' variant="outlined"
                     value={value}
@@ -85,12 +80,10 @@ const Form = () => {
                         setInputValue(newInputValue);
                         console.log(inputValue);
                     }}
-                    // onChange={handleDropdownChange}
-                    // onInputChange={handleDropdownChange}
-                    // setTaskData({ ...taskData, parentTask: value})
-                    /> } />
-                {/* </Stack> */}
-                {/* <TextField name="parentTask" variant="outlined" label="Parent Task *optional*" fullWidth value={taskData.parentTask} onChange={(e) => setTaskData({ ...taskData, parentTask: e.target.value})} /> */}
+                    onChange={handleDropdownChange}
+                    onInputChange={handleDropdownChange}
+                    /> } /> */}
+                <TextField name="parentTask" variant="outlined" label="Parent Task *optional*" fullWidth value={taskData.parentTask} onChange={(e) => setTaskData({ ...taskData, parentTask: e.target.value})} />
                 <TextField name="title" required variant="outlined" label="Title" fullWidth value={taskData.title} onChange={(e) => setTaskData({ ...taskData, title: e.target.value})} />
                 <TextField name="description" variant="outlined" label="Description" fullWidth value={taskData.description} onChange={(e) => setTaskData({ ...taskData, description: e.target.value})} />
                 <TextField inputProps={{readOnly: true}} name="status" variant="outlined" label="Status" fullWidth value={taskData.status} onChange={(e) => setTaskData({ ...taskData, status: e.target.value})} />

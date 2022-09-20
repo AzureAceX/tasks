@@ -19,9 +19,9 @@ export const createTask = (tasks) => async (dispatch) => {
     }    
 }
 
-export const updateTaskStatus = (tasks) => async (dispatch) => {
+export const updateTaskStatus = (id, task) => async (dispatch) => {
     try{
-        const { data } = await api.updateTaskStatus(tasks);
+        const { data } = await api.updateTaskStatus(id, task);
         dispatch({ type: 'UPDATE', payload: data });
     }catch(error) {
         console.log(error.message);
