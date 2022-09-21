@@ -18,7 +18,7 @@ const Form = (currentId, setCurrentId) => {
     });
 
     parentTaskList?.forEach((element) => {
-        parentTasksFiltered.push(JSON.parse(JSON.stringify(element[1].title))); //looks ugly.....forgive me for this sin
+        parentTasksFiltered.push(JSON.parse(JSON.stringify(element[1].title))); //looks ugly.....forgive me for this sin while i finish up
     });
 
     const [taskData, setTaskData ] = useState({parentTask: '', title:'', description:'', status:'In Progress' , childTasks:'' });

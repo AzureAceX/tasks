@@ -1,5 +1,5 @@
 import Task from "../models/task.js";
-import { verifyDelete } from "../service/task.js";
+import { verifyUpdate, verifyDelete} from "../service/task.js";
 // import  "../service/task.js";
 
 export const getTask = async (req, res) => {
@@ -32,9 +32,14 @@ export const updateTaskStatus = async (req, res) => {
         return res.status(404).send(`No Task With ID: ${id}`);
         
     const taskToUpdate = req.body;
-    // const updatedTask = new Task(taskToUpdate);
-    // verifyUpdate(updatedTask);
-    taskToUpdate.status = "DONE"
+    const updatedTask = new Task(taskToUpdate);
+    
+    if(verifyUpdate(updatedTask))
+        //currently manually doing the update here. vile, yes i know halliru
+        taskToUpdate.status = "DONE";         
+    else
+        return "Cannot Update Selected ID"
+
     try{
         const updatedTask = await Task.findByIdAndUpdate(_id, taskToUpdate, {new : true});
         res.status(201).json(updatedTask);
@@ -48,14 +53,15 @@ export const deleteTask = async (req, res) => {
 
     let targetTask = req.body;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No Task With ID: ${id}`);
+    if (!mongoose.Types.ObjectId.isValid(id)) 
+        return res.status(404).send(`No Task With ID: ${id}`);
 
     //get the entire obj, if it has no parentTask and no childIds, instant delete is approved.
     if(targetTask.childIds == "" && targetTask.parentTask == "")
         await Task.remove(id);
-    // else if(verifyDelete(targetTask)){
-        // await Task.findByIdAndRemove(id);
-    // }
+    else if(verifyDelete(targetTask)){
+        await Task.findByIdAndRemove(id);
+    }
 
     res.json({ message: "Task deleted successfully." });
 }

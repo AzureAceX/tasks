@@ -3,7 +3,7 @@ import {Card, CardActions, CardContent, Button, Typography } from '@material-ui/
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { deleteTask, updateTaskStatus } from '../../../actions/tasks.js';
-import { useDispatch} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 
 import useStyles from './styles';
 
@@ -11,9 +11,19 @@ const Task = ({task, currentId, setCurrentId}) => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
+    // const updatedTask = useSelector((state) => currentId ? state.tasks.tasks.find((tsk) => currentId === tsk._id) : null);
+    
+    // useEffect(() => {
+    // }, [updatedTask]);
+
     const handleDelete = (e) => {
         // dispatch(deleteTask(taskData));
     }
+
+    // console.dir(task);
+    // const test = () => {setCurrentId(2)};
+    // test();
+    // console.log(currentId)
 
     const handleUpdate = () => {
         // if(currentId)
@@ -21,6 +31,7 @@ const Task = ({task, currentId, setCurrentId}) => {
             console.dir(task);
             console.log(currentId)
     }
+    console.log(currentId)
 
     return(
         <Card className={classes.card}>
@@ -32,10 +43,10 @@ const Task = ({task, currentId, setCurrentId}) => {
             </div>
             <CardContent>
                 <Typography className={classes.title} variant="body2" gutterBottom>{task.description}</Typography>
-                <Typography variant="body2" color="textSecondary">childidssssss{task.childIds?.map((childIds,index) => `${childIds} `) }</Typography>
+                <Typography variant="body2" color="textSecondary">childidssssss {task.childIds?.map((childIds, index) => `${childIds} `) }</Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
-                <Button size="small" color="primary" onClick={() => setCurrentId(task._id)} >
+                <Button size="small" color="primary" onClick={(e) => setCurrentId(task._id)} >
                     <CheckCircleOutlineIcon/>
                     Done
                 </Button>

@@ -21,7 +21,7 @@ export const defReducerAlt = (state = { tasks: [] }, action) => {
             return state.tasks.map((task) => task._id === action.payload ? action.payload : task);
         default :
             return {tasks: action.payload};
-     }
+    }
 }
 
 
