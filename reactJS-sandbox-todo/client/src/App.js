@@ -1,5 +1,5 @@
 import React, { useEffect, useState} from "react";
-import { Container, AppBar, Typography, Grow, Grid } from "@material-ui/core";
+import { Container, AppBar, Typography, Grow, Grid, Button } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 
 import { getTask } from "./actions/tasks.js";
@@ -13,7 +13,7 @@ import useStyles from "./styles.js";
 const App = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [currentId, setCurrentId] = useState(null);
+  const [CurrentId, setCurrentId] = useState({});
   
   useEffect(() => {
     dispatch(getTask());
@@ -31,10 +31,13 @@ const App = () => {
         <Container>
           <Grid container justifyContent="space-between" alignItems="stretch" spacing={3}>
             <Grid item xs={12} sm={5}>
-              <Form currentId={currentId} setCurrentId={setCurrentId}/>
+              <Form CurrentId={CurrentId} setCurrentId={setCurrentId}/>
             </Grid>
             <Grid item xs={12} sm={7} style={{ maxHeight: "100vh", overflow: "auto" }}>
-              <Tasks currentId={currentId} setCurrentId={setCurrentId}/>
+              <Tasks CurrentId={CurrentId} setCurrentId={setCurrentId}/>
+              <Button size="small" color="primary" onClick={() => setCurrentId(2)} >
+                    Done
+                </Button>
             </Grid>
           </Grid>
         </Container>

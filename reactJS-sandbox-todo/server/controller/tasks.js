@@ -1,6 +1,6 @@
 import Task from "../models/task.js";
 import { verifyUpdate, verifyDelete} from "../service/task.js";
-// import  "../service/task.js";
+import * as mongodb from "mongodb";
 
 export const getTask = async (req, res) => {
     try{
@@ -16,7 +16,6 @@ export const createTask = async (req, res) => {
     
     const newTask = new Task(task);
     try{
-        console.log(newTask.title)
         await newTask.save();
         res.status(201).json(newTask);
     }catch (error){
@@ -27,24 +26,23 @@ export const createTask = async (req, res) => {
 export const updateTaskStatus = async (req, res) => {
     
     const { id: _id } = req.params;
+    const updatedTask = req.body;
+    const taskToUpdate = new Task(updatedTask);
 
-    if(mongooose.Types.ObjectId.isValid(_id)) 
-        return res.status(404).send(`No Task With ID: ${id}`);
-        
-    const taskToUpdate = req.body;
-    const updatedTask = new Task(taskToUpdate);
+    if(!mongodb.ObjectId.isValid(_id)) return res.status(404).send(`No Task With ID: ${_id}`);
     
-    if(verifyUpdate(updatedTask))
+    updatedTask.status = "DONE";         
+    console.dir(updatedTask);
+    // if(verifyUpdate(updatedTask))
         //currently manually doing the update here. vile, yes i know halliru
-        taskToUpdate.status = "DONE";         
-    else
-        return "Cannot Update Selected ID"
-
+        // taskToUpdate.status = "DONE";         
+    // else
+    //     return "Cannot Update Selected ID"
     try{
         const updatedTask = await Task.findByIdAndUpdate(_id, taskToUpdate, {new : true});
-        res.status(201).json(updatedTask);
+        res.status(201).json(taskToUpdate);
     }catch (error){
-        res.json(updatedTask);
+        res.json(taskToUpdate);
     }
 };
 

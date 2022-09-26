@@ -7,7 +7,7 @@ import { useDispatch, useSelector} from 'react-redux';
 
 import useStyles from './styles';
 
-const Task = ({task, currentId, setCurrentId}) => {
+const Task = ({task, CurrentId, setCurrentId}) => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
@@ -20,18 +20,12 @@ const Task = ({task, currentId, setCurrentId}) => {
         // dispatch(deleteTask(taskData));
     }
 
-    // console.dir(task);
-    // const test = () => {setCurrentId(2)};
-    // test();
-    // console.log(currentId)
-
     const handleUpdate = () => {
-        // if(currentId)
-            // dispatch(updateTaskStatus(currentId, task));
-            console.dir(task);
-            console.log(currentId)
+        console.dir("task id: " + task._id);
+        if(task._id)
+            dispatch(updateTaskStatus(task._id, task));
     }
-    console.log(currentId)
+    // console.log(CurrentId)
 
     return(
         <Card className={classes.card}>
@@ -46,7 +40,8 @@ const Task = ({task, currentId, setCurrentId}) => {
                 <Typography variant="body2" color="textSecondary">childidssssss {task.childIds?.map((childIds, index) => `${childIds} `) }</Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
-                <Button size="small" color="primary" onClick={(e) => setCurrentId(task._id)} >
+                <Button size="small" color="primary" onClick={handleUpdate} >
+                {/* <Button size="small" color="primary" onClick={(e) => setCurrentId(task._id)} > */}
                     <CheckCircleOutlineIcon/>
                     Done
                 </Button>
