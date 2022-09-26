@@ -3,7 +3,7 @@ import Task from "../models/task.js";
 //run on update
 export const verifyUpdate = async (req, res) => {
 
-    const Task = new Task();
+    // const Task = new Task();
     let childElement = {};
 
     //If there are no children tasks, then mark as complete
@@ -12,7 +12,7 @@ export const verifyUpdate = async (req, res) => {
 
     //If the children tasks are ALL marked as DONE, then mark as complete
     //Requires searching for each child by ID -> 
-    targetTask.childIds.forEach(element => {
+    await targetTask.childIds.forEach(element => {
         childElement = Task.find(element._id)
         if(childElement.status != "DONE")
             return Boolean.false;
