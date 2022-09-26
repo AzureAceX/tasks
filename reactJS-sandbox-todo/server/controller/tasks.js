@@ -25,25 +25,24 @@ export const createTask = async (req, res) => {
 
 export const updateTaskStatus = async (req, res) => {
     
-    const { id: _id } = req.params;
-    const updatedTask = req.body;
-    const taskToUpdate = new Task(updatedTask);
+    const { id } = req.params;
+    // const updatedTask = req.body;
+    // const taskToUpdate = new Task(updatedTask);
+    const { title, description, status, childTasks } = req.body;
 
-    if(!mongodb.ObjectId.isValid(_id)) return res.status(404).send(`No Task With ID: ${_id}`);
+    if(!mongodb.ObjectId.isValid(id)) return res.status(404).send(`No Task With ID: ${id}`);
     
-    updatedTask.status = "DONE";         
-    console.dir(updatedTask);
-    // if(verifyUpdate(updatedTask))
-        //currently manually doing the update here. vile, yes i know halliru
-        // taskToUpdate.status = "DONE";         
-    // else
-    //     return "Cannot Update Selected ID"
-    try{
-        const updatedTask = await Task.findByIdAndUpdate(_id, taskToUpdate, {new : true});
-        res.status(201).json(taskToUpdate);
-    }catch (error){
-        res.json(taskToUpdate);
+    // const taskToUpdate = {title, description, status: 'DONE', childTasks, _id: id};
+    // taskToUpdate.status = "DONE";         
+    console.dir(taskToUpdate);
+    if(verifyUpdate(updatedTask)){
+        const taskToUpdate = {title, description, status: 'DONE', childTasks, _id: id};
     }
+    else
+        return "Cannot Update Selected ID"
+
+    await Task.findByIdAndUpdate(id, taskToUpdate, {new : true});
+    res.json(taskToUpdate);
 };
 
 export const deleteTask = async (req, res) => {
