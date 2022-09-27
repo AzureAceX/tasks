@@ -30,18 +30,21 @@ export const updateTaskStatus = async (req, res) => {
     let taskToUpdate = {}
     const { title, description, status, childTasks } = req.body;
 
+    console.log(req.body)
+
     if(!mongodb.ObjectId.isValid(id)) return res.status(404).send(`No Task With ID: ${id}`);
     
     // const taskToUpdate = {title, description, status: 'DONE', childTasks, _id: id};
-    console.dir(taskToUpdate);
-    if(verifyUpdate(taskToUpdate)){
-        taskToUpdate = {title, description, status: 'DONE', childTasks, _id: id};
-        await Task.findByIdAndUpdate(id, taskToUpdate, {new : true});
-    }
-    else
-        return res.error("Failed to Update Task ID: " + id);
 
-        res.json(taskToUpdate);
+    if(verifyUpdate(taskToUpdate)){
+        taskToUpdate = {title, description, status: 'Done', childTasks, _id: id};
+        console.log(taskToUpdate)
+        await Task.findByIdAndUpdate(id, taskToUpdate, {new : true});
+    }else{
+        return res.error("Failed to Update Task ID: " + id);
+    }
+
+    res.json(taskToUpdate);
 };
 
 export const deleteTask = async (req, res) => {

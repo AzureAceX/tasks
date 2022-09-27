@@ -34,6 +34,7 @@ const Task = ({task, CurrentId, setCurrentId}) => {
             </div>
             <div className={classes.details}>
                 {/* <Typography variant="body2" color="textSecondary">{task.childIds?.map((childIds,index) => `${childIds} `) }</Typography> */}
+                <Typography style={{color: "red"}} className={classes.title} variant="body2" gutterBottom>{task.status}</Typography>
             </div>
             <CardContent>
                 <Typography className={classes.title} variant="body2" gutterBottom>{task.description}</Typography>
