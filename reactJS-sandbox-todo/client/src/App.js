@@ -35,9 +35,6 @@ const App = () => {
             </Grid>
             <Grid item xs={12} sm={7} style={{ maxHeight: "100vh", overflow: "auto" }}>
               <Tasks CurrentId={CurrentId} setCurrentId={setCurrentId}/>
-              <Button size="small" color="primary" onClick={() => setCurrentId(2)} >
-                    Done
-                </Button>
             </Grid>
           </Grid>
         </Container>

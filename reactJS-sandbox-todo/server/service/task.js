@@ -1,29 +1,23 @@
 import Task from "../models/task.js";
 
 //run on update
-export const verifyUpdate = (targetTask) => {
+export const verifyUpdate = async (targetTask) => {
 
-    // const Task = new Task();
-    let childElement = targetTask;
+    //If no childTasks then just markk as done
+    if(!targetTask.childTasks)
+        return true;
+    else if(targetTask.childTasks.length > 0){
+        //If the children tasks are ALL marked as DONE, then mark as complete
+        //Requires searching for each child by ID -> 
 
-    //If there are no children tasks, then mark as complete
-
-    console.dir(childElement)
-    console.log(childElement)
-
-    // if(targetTask.childIds == 'undefined' || targetTask.childIds == '')
-    return Boolean.true;
-    return true;
-
-    //If the children tasks are ALL marked as DONE, then mark as complete
-    //Requires searching for each child by ID -> 
-
-    // await targetTask.childIds.forEach(element => {
-    //     childElement = Task.find(element._id)
-    //     if(childElement.status != "DONE")
-    //         return Boolean.false;
-    // });
-    
+            // await targetTask.childIds.forEach(element => {
+            targetTask.childTasks.forEach(element => {
+                // console.log(element);
+                // childElement = Task.find(element._id)
+                // if(childElement.status != "DONE")
+                //     return Boolean.false;
+            });
+    }
 };
 
 //run on create

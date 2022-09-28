@@ -8,7 +8,6 @@ import useStyles from './styles';
 const Tasks = (CurrentId, setCurrentId) => {
     const tasks = useSelector((state) => state.tasks.tasks);
     const classes = useStyles();
-    console.log(CurrentId);
 
     return(
         !tasks ? <CircularProgress/> : (

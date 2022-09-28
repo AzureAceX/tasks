@@ -38,7 +38,7 @@ const Task = ({task, CurrentId, setCurrentId}) => {
             </div>
             <CardContent>
                 <Typography className={classes.title} variant="body2" gutterBottom>{task.description}</Typography>
-                <Typography variant="body2" color="textSecondary">childidssssss {task.childIds?.map((childIds, index) => `${childIds} `) }</Typography>
+                <Typography variant="body2" color="textSecondary">{task.childTasks?.map((childIds, index) => `${childIds} `) }</Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
                 <Button size="small" color="primary" onClick={handleUpdate} >

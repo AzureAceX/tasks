@@ -26,25 +26,33 @@ export const createTask = async (req, res) => {
 export const updateTaskStatus = async (req, res) => {
     
     const { id } = req.params;
-    // const updatedTask = req.body;
-    let taskToUpdate = {}
-    const { title, description, status, childTasks } = req.body;
-
-    console.log(req.body)
-
     if(!mongodb.ObjectId.isValid(id)) return res.status(404).send(`No Task With ID: ${id}`);
-    
-    // const taskToUpdate = {title, description, status: 'DONE', childTasks, _id: id};
 
-    if(verifyUpdate(taskToUpdate)){
-        taskToUpdate = {title, description, status: 'Done', childTasks, _id: id};
-        console.log(taskToUpdate)
-        await Task.findByIdAndUpdate(id, taskToUpdate, {new : true});
-    }else{
-        return res.error("Failed to Update Task ID: " + id);
+    const { title, description, status, childTasks } = req.body;
+    const taskToUpdateDone = {title, description, status: 'DONE', childTasks, _id: id};
+    const taskToUpdateComplete = {title, description, status: 'COMPLETE', childTasks, _id: id};
+
+
+    if(!taskToUpdate.childTasks){ //no child tasks so just update
+        const updateObj = await Task.findByIdAndUpdate(id, taskToUpdateDone, {new : true});
+        return res.json(updateObj);
+    }else{//else check state of child tasks 
+        let validStatusChildCounter = 0;
+        const children = childTasks?.map((childId, index) => {
+            let child = Task.findById(childId)
+            console.log(child)
+            if(child.status == "DONE" || child.status == "COMPLETE" ){
+                validStatusChildCounter++;
+                // return res.send("Failed to Update Task ID: " + id + " - Ch");
+            }
+        })
+        if(validStatusChildCounter == children.length) //all are done or complete - so mark as complete
+           await Task.findByIdAndUpdate(id, taskToUpdateComplete, {new : true});
+        
+
     }
-
-    res.json(taskToUpdate);
+    
+    return res.send("Failed to Update Task ID: " + id);
 };
 
 export const deleteTask = async (req, res) => {
