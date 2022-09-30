@@ -16,6 +16,23 @@ const Task = ({task, CurrentId, setCurrentId}) => {
     // useEffect(() => {
     // }, [updatedTask]);
 
+    let isInProgress = false;
+
+    switch(task.status.toUpperCase()){
+        case 'IN PROGRESS':
+        isInProgress = true;
+            break;
+        case 'DONE':
+            isInProgress = true;
+            break;
+        case 'COMPLETE':
+            isInProgress = true;
+            break;
+        default: 
+            isInProgress = false;
+            break;
+    }
+
     const handleDelete = (e) => {
         // dispatch(deleteTask(taskData));
     }
@@ -25,7 +42,6 @@ const Task = ({task, CurrentId, setCurrentId}) => {
         if(task._id)
             dispatch(updateTaskStatus(task._id, task));
     }
-    // console.log(CurrentId)
 
     return(
         <Card className={classes.card}>
@@ -40,7 +56,7 @@ const Task = ({task, CurrentId, setCurrentId}) => {
                 <Typography className={classes.title} variant="body2" gutterBottom>{task.description}</Typography>
                 <Typography variant="body2" color="textSecondary">{task.childTasks?.map((childIds, index) => `${childIds} `) }</Typography>
             </CardContent>
-            <CardActions className={classes.cardActions}>
+            <CardActions className={classes.cardActions} style={{backgroundColor: isInProgress ? '#ededeb' : '#233625',}}>
                 <Button size="small" color="primary" onClick={handleUpdate} >
                 {/* <Button size="small" color="primary" onClick={(e) => setCurrentId(task._id)} > */}
                     <CheckCircleOutlineIcon/>
