@@ -33,7 +33,7 @@ const App = () => {
             <Grid item xs={12} sm={5}>
               <Form CurrentId={CurrentId} setCurrentId={setCurrentId}/>
             </Grid>
-            <Grid item xs={12} sm={7} style={{ maxHeight: "100vh", overflow: "auto" }}>
+            <Grid item xs={12} sm={7} style={{ maxHeight: "90vh", overflow: "auto" }}>
               <Tasks CurrentId={CurrentId} setCurrentId={setCurrentId}/>
             </Grid>
           </Grid>
