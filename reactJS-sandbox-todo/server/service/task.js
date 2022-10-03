@@ -20,11 +20,22 @@ export const verifyUpdate = async (targetTask) => {
     }
 };
 
-//run on create
-//link to Parent on task creation. Takes the new task id, and appends it to .childIds of the parent task 
-export const verifyParent = async (req, res) => {
-    const { id } =  req.params;
+//run on create - link to Parent on task creation. 
+export const verifyParent = (targetTask) => {
+    
+    if(!targetTask.childTasks)
+        return console.log("Task has no child tasks");
 
+    const children = targetTask?.childTasks.map((task, index) => {
+        return Task.findById(task._id) //get All the child objs
+    });
+
+    //Each child obj gets its parentTask updated.
+    children?.forEach((val) => {
+        const childUpdate = new Task(val)
+        childUpdate.parentTask = targetTask._id;
+        Task.findByIdAndUpdate(targetTask._id, childUpdate, {new : true})
+    })
 
 };
 

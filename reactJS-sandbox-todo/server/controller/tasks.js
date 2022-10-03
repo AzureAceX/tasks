@@ -1,5 +1,5 @@
 import Task from "../models/task.js";
-import { verifyDelete} from "../service/task.js";
+import { verifyDelete, verifyParent} from "../service/task.js";
 import * as mongodb from "mongodb";
 
 export const getTask = async (req, res) => {
@@ -13,10 +13,11 @@ export const getTask = async (req, res) => {
 
 export const createTask = async (req, res) => {
     const task = req.body;
-    
     const newTask = new Task(task);
+
     try{
         await newTask.save();
+        verifyParent(newTask);
         res.status(201).json(newTask);
     }catch (error){
         res.status(409).json({message: error.message});

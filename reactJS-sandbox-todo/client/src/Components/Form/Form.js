@@ -61,16 +61,16 @@ const Form = (currentId, setCurrentId) => {
                 <TextField name="title" required variant="outlined" label="Name" fullWidth value={taskData.title} onChange={(e) => setTaskData({ ...taskData, title: e.target.value})} />
                 <TextField name="description" variant="outlined" label="Description" fullWidth value={taskData.description} onChange={(e) => setTaskData({ ...taskData, description: e.target.value})} />
                 <TextField inputProps={{readOnly: true}} name="status" variant="outlined" label="Status" fullWidth value={taskData.status} onChange={(e) => setTaskData({ ...taskData, status: e.target.value})} />
-                {/* <div style={{width: '100%', paddingLeft: '10px', paddingRight: '10px'}}> */}
+                <div style={{width: '100%', padding: '5px', paddingBottom: '10px'}}>
                 <Select 
                     // value={value}
-                    style={{width: '100%', paddingLeft: '10px', paddingRight:'10px'}}
+                    // style={{width: '100%', paddingLeft: '10px', paddingRight:'10px'}}
                     isMulti
                     name="Child Tasks"
                     options = {parentTaskList}
                     onChange={handleSelectChange}
                     />
-                {/* </div> */}
+                </div>
                 <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth>
                     Submit
                 </Button>

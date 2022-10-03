@@ -14,7 +14,6 @@ export const createTask = (tasks) => async (dispatch) => {
     try{
         const { data } = await api.createTask(tasks);
         dispatch({ type: 'CREATE', payload: data });
-        console.log("dispatching")
     }catch(error) {
         console.log(error.message);
     }    
@@ -29,7 +28,7 @@ export const updateTaskStatus = (id, task) => async (dispatch) => {
         if(error.response)
             console.log(error.response.data);
     }    
-    window.location.reload(); //testing refressssssssssssshhing 
+    window.location.reload(); //forced refresh...because i is a state mgt noob for a lil longer 
 }
 
 export const deleteTask = (id) => async (dispatch) => {
