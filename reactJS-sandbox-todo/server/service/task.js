@@ -26,6 +26,7 @@ export const verifyParent = (targetTask) => {
     if(!targetTask.childTasks)
         return console.log("Task has no child tasks");
 
+    console.log("sakdnaldnalskndklasndlkandsl")
     const children = targetTask?.childTasks.map((task, index) => {
         return Task.findById(task._id) //get All the child objs
     });

@@ -6,13 +6,14 @@ import Task from "./Task/Task.js";
 import useStyles from './styles';
 
 const Tasks = (CurrentId, setCurrentId) => {
-    const tasks = useSelector((state) => state.tasks.tasks);
+    const tasks = useSelector((state) => state?.tasks?.tasks);
+
     const classes = useStyles();
 
     return(
         !tasks ? <CircularProgress/> : (
             <Grid className={classes.container} container alignItems="stretch" spacing={3}>
-                {tasks.map((task, index) => (
+                {tasks?.map((task, index) => (
                     <Grid key={index} item xs={12} sm={6}>
                         <Task task={task} CurrentId={CurrentId} setCurrentId={setCurrentId}/>
                     </Grid>

@@ -14,19 +14,21 @@ const Form = (currentId, setCurrentId) => {
     const dispatch = useDispatch();
 
     const taskList = useSelector((state) => state?.tasks?.tasks);
+    
+    let parentTaskList = [];
 
-    // let parentTasksFiltered = [];
-    const parentTaskList = taskList?.map((task, index) => {
-        // return [{"_id": task._id}, {"title": task.title}];
-        return {"label": task.title, "value": task._id};
-    });
+    if(taskList){
+        parentTaskList = taskList?.map((task, index) => {
+            // return [{"_id": task._id}, {"title": task.title}];
+            return {"label": task.title, "value": task._id};
+        });
+    }
 
     // parentTaskList?.forEach((element) => {
     //     parentTasksFiltered.push(JSON.parse(JSON.stringify(element[1].title))); //looks ugly.....forgive me for this sin while i finish up
     // });
 
     const [taskData, setTaskData ] = useState({parentTask: '', title:'', description:'', status:'In Progress' , childTasks:'' });
-    
     const [selectValue, setSelectValue] = useState([]);
 
     // parentTaskList = taskList?.map((task, index) => {
